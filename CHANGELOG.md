@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-03-29
+
 ### Added
 
 - TypeScript-based `pmkit` CLI scaffolding with `add`, `remove`, `check`, `doctor`, `help`, and `version`
