@@ -8,7 +8,7 @@ export interface AssetDefinition {
   targetPath: string;
 }
 
-const assistantCommands = ["pmkit-domain.md", "pmkit-press.md", "pmkit-faq.md", "pmkit-align.md"];
+const assistantCommands = ["pmkey-domain.md", "pmkey-press.md", "pmkey-faq.md", "pmkey-align.md"];
 const sharedTemplates = [
   "domain-template.md",
   "press-template.md",

@@ -4,21 +4,27 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed the published package, CLI, and assistant command prefix from `pm-kit`/`pmkit` to `pmkey`
+- Updated current-facing documentation, CLI help text, and packaged assistant assets to use `pmkey`
+- Documented that `.pmkit/manifest.json` and the `pm-kit` repository slug remain intentional compatibility-era identifiers for now
+
 ## [0.2.0] - 2026-03-29
 
 ### Added
 
-- TypeScript-based `pmkit` CLI scaffolding with `add`, `remove`, `check`, `doctor`, `help`, and `version`
+- TypeScript-based `pmkey` CLI scaffolding with `add`, `remove`, `check`, `doctor`, `help`, and `version`
 - Claude Code and Codex adapter structure with manifest-based ownership tracking
-- Versioned `assets/` tree for `/pmkit-*` assistant commands and shared `.product` templates
+- Versioned `assets/` tree for `/pmkey-*` assistant commands and shared `.product` templates
 - Vitest-based unit and integration coverage for manifest and CLI lifecycle flows
 - GitHub Actions for CI and tag-driven release publishing to GitHub Releases and npm
 
 ### Changed
 
-- README now documents npm-first installation and direct `npx` execution for the `pmkit` CLI
+- README now documents npm-first installation and direct `npx` execution for the `pmkey` CLI
 - `.npmignore` and package metadata prepared for npm distribution
-- npm package name is now `pm-kit` while the installed binary remains `pmkit`
+- npm package name is now `pmkey`
 
 ### Removed
 

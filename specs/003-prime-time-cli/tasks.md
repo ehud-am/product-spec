@@ -54,9 +54,9 @@
 
 ## Phase 3: User Story 1 - Install and Add Across Agents (Priority: P1) 🎯 MVP
 
-**Goal**: Let a user install `pmkit` and add Claude, Codex, or both into a project with the correct `/pmkit-*` assets and manifest state.
+**Goal**: Let a user install `pmkey` and add Claude, Codex, or both into a project with the correct `/pmkey-*` assets and manifest state.
 
-**Independent Test**: In a clean fixture project, run `pmkit add claude`, `pmkit add codex`, and `pmkit add both`; verify the correct command directories, shared templates, and `.pmkit/manifest.json` are created without duplicate assets.
+**Independent Test**: In a clean fixture project, run `pmkey add claude`, `pmkey add codex`, and `pmkey add both`; verify the correct command directories, shared templates, and `.pmkit/manifest.json` are created without duplicate assets.
 
 ### Implementation for User Story 1
 
@@ -64,8 +64,8 @@
 - [X] T016 [P] [US1] Create Codex slash-command asset files under assets/codex/commands/
 - [X] T017 [P] [US1] Create shared product template asset files under assets/product/templates/
 - [X] T018 [US1] Implement add-operation orchestration for asset copy and manifest writes in src/core/orchestration/add.ts
-- [X] T019 [US1] Implement `pmkit add` command wiring in src/cli/commands/add.ts
-- [X] T020 [US1] Document global and local install plus `pmkit add` flows in README.md
+- [X] T019 [US1] Implement `pmkey add` command wiring in src/cli/commands/add.ts
+- [X] T020 [US1] Document global and local install plus `pmkey add` flows in README.md
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -73,16 +73,16 @@
 
 ## Phase 4: User Story 2 - Manage Agent Integrations from the CLI (Priority: P1)
 
-**Goal**: Let a user remove Claude, Codex, or both safely, with deletion limited to pmkit-managed files.
+**Goal**: Let a user remove Claude, Codex, or both safely, with deletion limited to pmkey-managed files.
 
-**Independent Test**: In a fixture project with both integrations added, run `pmkit remove claude`, verify only Claude-managed files are deleted, then run `pmkit remove both` and confirm the remaining pmkit-managed files and manifest state are cleaned up correctly.
+**Independent Test**: In a fixture project with both integrations added, run `pmkey remove claude`, verify only Claude-managed files are deleted, then run `pmkey remove both` and confirm the remaining pmkey-managed files and manifest state are cleaned up correctly.
 
 ### Implementation for User Story 2
 
 - [X] T021 [US2] Implement remove-operation orchestration with manifest-scoped deletion in src/core/orchestration/remove.ts
 - [X] T022 [US2] Implement shared-asset retention and final-cleanup rules in src/core/orchestration/shared-assets.ts
-- [X] T023 [US2] Implement `pmkit remove` command wiring in src/cli/commands/remove.ts
-- [X] T024 [US2] Add README coverage for `pmkit remove` behavior and safe file ownership semantics in README.md
+- [X] T023 [US2] Implement `pmkey remove` command wiring in src/cli/commands/remove.ts
+- [X] T024 [US2] Add README coverage for `pmkey remove` behavior and safe file ownership semantics in README.md
 
 **Checkpoint**: At this point, User Stories 1 and 2 should both work independently
 
@@ -92,16 +92,16 @@
 
 **Goal**: Let a user inspect integration health with `check` and deeper diagnostics with `doctor`, plus discover version/help information from the same CLI.
 
-**Independent Test**: In one healthy fixture project and one intentionally drifted fixture project, run `pmkit check both` and `pmkit doctor both`; verify each target is classified correctly and the reported next action matches the detected issue.
+**Independent Test**: In one healthy fixture project and one intentionally drifted fixture project, run `pmkey check both` and `pmkey doctor both`; verify each target is classified correctly and the reported next action matches the detected issue.
 
 ### Implementation for User Story 3
 
 - [X] T025 [US3] Implement health evaluation and issue classification in src/core/orchestration/check.ts
 - [X] T026 [US3] Implement detailed diagnostic report generation in src/core/orchestration/doctor.ts
-- [X] T027 [P] [US3] Implement `pmkit check` command wiring in src/cli/commands/check.ts
-- [X] T028 [P] [US3] Implement `pmkit doctor` command wiring in src/cli/commands/doctor.ts
-- [X] T029 [P] [US3] Implement `pmkit version` command wiring in src/cli/commands/version.ts
-- [X] T030 [P] [US3] Implement `pmkit help` command customization in src/cli/commands/help.ts
+- [X] T027 [P] [US3] Implement `pmkey check` command wiring in src/cli/commands/check.ts
+- [X] T028 [P] [US3] Implement `pmkey doctor` command wiring in src/cli/commands/doctor.ts
+- [X] T029 [P] [US3] Implement `pmkey version` command wiring in src/cli/commands/version.ts
+- [X] T030 [P] [US3] Implement `pmkey help` command customization in src/cli/commands/help.ts
 - [X] T031 [US3] Document `check`, `doctor`, `version`, and `help` usage in README.md
 
 **Checkpoint**: All user stories should now be independently functional
@@ -169,10 +169,10 @@ Task: "Create shared product template asset files under assets/product/templates
 
 ```bash
 # Launch CLI command wiring tasks for User Story 3 together after core diagnostics exist:
-Task: "Implement pmkit check command wiring in src/cli/commands/check.ts"
-Task: "Implement pmkit doctor command wiring in src/cli/commands/doctor.ts"
-Task: "Implement pmkit version command wiring in src/cli/commands/version.ts"
-Task: "Implement pmkit help command customization in src/cli/commands/help.ts"
+Task: "Implement pmkey check command wiring in src/cli/commands/check.ts"
+Task: "Implement pmkey doctor command wiring in src/cli/commands/doctor.ts"
+Task: "Implement pmkey version command wiring in src/cli/commands/version.ts"
+Task: "Implement pmkey help command customization in src/cli/commands/help.ts"
 ```
 
 ---
@@ -184,7 +184,7 @@ Task: "Implement pmkit help command customization in src/cli/commands/help.ts"
 1. Complete Phase 1: Setup
 2. Complete Phase 2: Foundational
 3. Complete Phase 3: User Story 1
-4. Validate `pmkit add` in a clean fixture project
+4. Validate `pmkey add` in a clean fixture project
 5. Demo the npm + add flow
 
 ### Incremental Delivery

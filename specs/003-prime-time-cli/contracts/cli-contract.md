@@ -1,27 +1,27 @@
-# CLI Contract: pmkit
+# CLI Contract: pmkey
 
 **Branch**: `003-prime-time-cli` | **Date**: 2026-03-29
 
 ## Purpose
 
-Define the user-facing command contract for the `pmkit` CLI so add/remove/check behavior is consistent across Claude Code and Codex integrations.
+Define the user-facing command contract for the `pmkey` CLI so add/remove/check behavior is consistent across Claude Code and Codex integrations.
 
 ## Command Surface
 
 ```text
-pmkit <command> [target] [options]
+pmkey <command> [target] [options]
 ```
 
 ### Supported commands
 
 | Command | Purpose |
 |---------|---------|
-| `pmkit add <target>` | Add pmkit-managed integration files for `claude`, `codex`, or `both` to the current project |
-| `pmkit remove <target>` | Remove pmkit-managed integration files for `claude`, `codex`, or `both` from the current project |
-| `pmkit check [target]` | Validate integration state for one assistant or all supported assistants |
-| `pmkit doctor [target]` | Provide richer diagnostics and repair guidance for one assistant or all |
-| `pmkit version` | Print installed CLI version and manifest version when available |
-| `pmkit help` | Show top-level help and command usage |
+| `pmkey add <target>` | Add pmkey-managed integration files for `claude`, `codex`, or `both` to the current project |
+| `pmkey remove <target>` | Remove pmkey-managed integration files for `claude`, `codex`, or `both` from the current project |
+| `pmkey check [target]` | Validate integration state for one assistant or all supported assistants |
+| `pmkey doctor [target]` | Provide richer diagnostics and repair guidance for one assistant or all |
+| `pmkey version` | Print installed CLI version and manifest version when available |
+| `pmkey help` | Show top-level help and command usage |
 
 ## Targets
 
@@ -38,12 +38,12 @@ pmkit <command> [target] [options]
 - Human-readable output is the default.
 - Optional structured output may be added later, but is not required for this feature scope.
 
-## `pmkit add`
+## `pmkey add`
 
 ### Input
 
 ```text
-pmkit add <claude|codex|both>
+pmkey add <claude|codex|both>
 ```
 
 ### Reads
@@ -58,7 +58,7 @@ pmkit add <claude|codex|both>
 
 | Path | Action |
 |------|--------|
-| assistant command directories | Create if needed, then copy pmkit slash commands |
+| assistant command directories | Create if needed, then copy pmkey slash commands |
 | `.product/templates/` | Create if needed, then copy shared templates |
 | `.pmkit/manifest.json` | Create or update managed ownership state |
 
@@ -66,7 +66,7 @@ pmkit add <claude|codex|both>
 
 - Re-running `add` for an already managed target must be safe and idempotent.
 - Shared templates must not be duplicated.
-- Only packaged pmkit asset files may be written.
+- Only packaged pmkey asset files may be written.
 
 ### Output
 
@@ -74,34 +74,34 @@ Human-readable summary listing:
 - target(s) requested
 - target(s) added, refreshed, or skipped
 - template status
-- next recommended command (`pmkit check`)
+- next recommended command (`pmkey check`)
 
-## `pmkit remove`
+## `pmkey remove`
 
 ### Input
 
 ```text
-pmkit remove <claude|codex|both>
+pmkey remove <claude|codex|both>
 ```
 
 ### Reads
 
 | Resource | Required | Purpose |
 |----------|----------|---------|
-| `.pmkit/manifest.json` | Yes | Determine which files pmkit owns |
+| `.pmkit/manifest.json` | Yes | Determine which files pmkey owns |
 | current project root | Yes | Resolve deletion targets |
 
 ### Writes
 
 | Path | Action |
 |------|--------|
-| pmkit-managed assistant files | Delete only if recorded in manifest |
+| pmkey-managed assistant files | Delete only if recorded in manifest |
 | `.product/templates/` managed files | Delete only when no remaining targets require them |
 | `.pmkit/manifest.json` | Update or remove after ownership changes |
 
 ### Invariants
 
-- `remove` must never delete files that are not recorded as pmkit-managed.
+- `remove` must never delete files that are not recorded as pmkey-managed.
 - Removing one target must not break the other target's managed assets.
 - Removing a target that is already absent must succeed as a no-op with clear output.
 
@@ -113,12 +113,12 @@ Human-readable summary listing:
 - files skipped
 - remaining managed targets
 
-## `pmkit check`
+## `pmkey check`
 
 ### Input
 
 ```text
-pmkit check [claude|codex|both]
+pmkey check [claude|codex|both]
 ```
 
 ### Reads
@@ -141,12 +141,12 @@ Per target, report:
 - main issue(s), if any
 - recommended next step
 
-## `pmkit doctor`
+## `pmkey doctor`
 
 ### Input
 
 ```text
-pmkit doctor [claude|codex|both]
+pmkey doctor [claude|codex|both]
 ```
 
 ### Behavior

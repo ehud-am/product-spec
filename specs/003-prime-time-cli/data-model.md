@@ -10,7 +10,7 @@ This feature is a filesystem-oriented CLI, so the primary entities are integrati
 
 ### Assistant Integration Target
 
-Represents a supported assistant environment that pmkit can manage within a project.
+Represents a supported assistant environment that pmkey can manage within a project.
 
 **Fields**
 
@@ -30,19 +30,19 @@ Represents a supported assistant environment that pmkit can manage within a proj
 
 ### Asset Record
 
-Represents a single installable pmkit-owned file.
+Represents a single installable pmkey-owned file.
 
 **Fields**
 
 | Field | Type | Description |
 |------|------|-------------|
-| `id` | string | Stable identifier such as `claude/pmkit-domain` |
+| `id` | string | Stable identifier such as `claude/pmkey-domain` |
 | `category` | enum | `assistant-command` or `product-template` |
 | `sourcePath` | path | Repository asset path used as the canonical file source |
 | `targetPath` | path | Project-relative destination path |
 | `target` | enum/string | `claude`, `codex`, or `shared` |
 | `checksum` | string | Content hash used for validation/reporting |
-| `managed` | boolean | Whether pmkit currently owns the deployed file |
+| `managed` | boolean | Whether pmkey currently owns the deployed file |
 
 **Validation rules**
 
@@ -52,7 +52,7 @@ Represents a single installable pmkit-owned file.
 
 ### Managed Manifest
 
-Project-local record of pmkit-managed state stored in `.pmkit/manifest.json`.
+Project-local record of pmkey-managed state stored in `.pmkit/manifest.json`.
 
 **Fields**
 
@@ -73,14 +73,14 @@ Project-local record of pmkit-managed state stored in `.pmkit/manifest.json`.
 
 ### Managed Target State
 
-Tracks pmkit ownership and health expectations for one assistant in one project.
+Tracks pmkey ownership and health expectations for one assistant in one project.
 
 **Fields**
 
 | Field | Type | Description |
 |------|------|-------------|
 | `target` | enum | `claude` or `codex` |
-| `installed` | boolean | Whether pmkit considers this assistant currently added |
+| `installed` | boolean | Whether pmkey considers this assistant currently added |
 | `assets` | Asset Record[] | Files managed for this assistant |
 | `lastOperation` | enum | `add`, `remove`, `check`, or `doctor` |
 | `lastHealthyAt` | datetime/null | Timestamp of last healthy check result |

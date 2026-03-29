@@ -18,7 +18,7 @@ afterEach(async () => {
 
 describe("manifest helpers", () => {
   it("writes and reads a manifest from the project-local .pmkit directory", async () => {
-    const rootDir = await mkdtemp(path.join(os.tmpdir(), "pmkit-manifest-"));
+    const rootDir = await mkdtemp(path.join(os.tmpdir(), "pmkey-manifest-"));
     cleanupPaths.push(rootDir);
 
     const manifest = createEmptyManifest(rootDir, "0.1.0");

@@ -2,9 +2,9 @@
 
 **Branch**: `003-prime-time-cli` | **Date**: 2026-03-29
 
-## Decision 1: Build pmkit as a TypeScript CLI published to npm
+## Decision 1: Build pmkey as a TypeScript CLI published to npm
 
-**Decision**: Implement `pmkit` as a TypeScript CLI running on Node and distributed through npm.
+**Decision**: Implement `pmkey` as a TypeScript CLI running on Node and distributed through npm.
 
 **Rationale**: The feature now includes cross-platform filesystem work, project-local state tracking, dual assistant support, safe remove behavior, and richer diagnostics. TypeScript provides enough structure for adapter contracts, manifest validation, and testing without adding excessive complexity. npm distribution also matches the desired onboarding flow for global install, while still supporting local/project usage through npm scripts or `npx`.
 
@@ -14,7 +14,7 @@
 
 ## Decision 2: Use one unified binary with subcommands
 
-**Decision**: Expose one `pmkit` executable with subcommands such as `add`, `remove`, `check`, `doctor`, `version`, and `help`.
+**Decision**: Expose one `pmkey` executable with subcommands such as `add`, `remove`, `check`, `doctor`, `version`, and `help`.
 
 **Rationale**: A single executable reduces user confusion and allows shared orchestration for path discovery, asset resolution, manifest updates, and output formatting. It also aligns with the clarified requirement that npm handles CLI installation while subcommands manage per-project integration state.
 
@@ -34,9 +34,9 @@
 
 ## Decision 4: Store managed state in a project-local `.pmkit/manifest.json`
 
-**Decision**: Persist pmkit-owned integration state in `.pmkit/manifest.json` at the repository root.
+**Decision**: Persist pmkey-owned integration state in `.pmkit/manifest.json` at the repository root.
 
-**Rationale**: The CLI needs a durable ownership record so `remove` can delete only files created by pmkit. A root-level hidden folder keeps this operational metadata separate from `.product/` content and from assistant-specific folders. The manifest also gives `check` a canonical view of expected assets, installed version, and target coverage.
+**Rationale**: The CLI needs a durable ownership record so `remove` can delete only files created by pmkey. A root-level hidden folder keeps this operational metadata separate from `.product/` content and from assistant-specific folders. The manifest also gives `check` a canonical view of expected assets, installed version, and target coverage.
 
 **Alternatives considered**:
 - **No manifest; infer ownership from filenames alone**: Unsafe if users edit or partially replace files manually.
@@ -47,7 +47,7 @@
 
 **Decision**: Maintain slash commands and templates as versioned files under an `assets/` directory and copy them into project destinations during `add`.
 
-**Rationale**: pm-kit’s value is still rooted in Markdown command and template assets. Treating them as source-controlled assets preserves reviewability and keeps the CLI focused on orchestration rather than content generation. It also allows add/remove/check flows to reason from a single canonical registry.
+**Rationale**: pmkey’s value is still rooted in Markdown command and template assets. Treating them as source-controlled assets preserves reviewability and keeps the CLI focused on orchestration rather than content generation. It also allows add/remove/check flows to reason from a single canonical registry.
 
 **Alternatives considered**:
 - **Generate command files programmatically**: Harder to review and more error-prone for mostly static content.
@@ -55,7 +55,7 @@
 
 ## Decision 6: Define `check` as a local health validation command and reserve `doctor` for deeper diagnostics
 
-**Decision**: `pmkit check` will validate local integration health by confirming expected directories, files, and manifest alignment. `pmkit doctor` will be a richer diagnostic mode that explains mismatches and recommends repair actions.
+**Decision**: `pmkey check` will validate local integration health by confirming expected directories, files, and manifest alignment. `pmkey doctor` will be a richer diagnostic mode that explains mismatches and recommends repair actions.
 
 **Rationale**: The spec requires a check operation now, but "working connection" should remain grounded in what the tool can verify reliably without launching external apps or depending on network calls. Separating quick status from deeper troubleshooting keeps the main flow fast and predictable.
 

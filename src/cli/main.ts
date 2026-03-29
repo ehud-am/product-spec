@@ -17,9 +17,9 @@ async function main(): Promise<void> {
 
   const program = new Command();
   program
-    .name("pmkit")
-    .description("Manage pm-kit project integrations for Claude Code and Codex")
-    .version(packageJson.version, "-V, --version", "Print the pmkit CLI version")
+    .name("pmkey")
+    .description("Manage pmkey project integrations for Claude Code and Codex")
+    .version(packageJson.version, "-V, --version", "Print the pmkey CLI version")
     .showHelpAfterError();
 
   registerAddCommand(program, { rootDir, packageRoot, version: packageJson.version });

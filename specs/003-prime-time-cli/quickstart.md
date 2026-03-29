@@ -4,18 +4,18 @@
 
 ## Goal
 
-Verify that the npm-based `pmkit` CLI can be installed, can manage Claude Code and Codex integrations in a project, and can report reliable health status.
+Verify that the npm-based `pmkey` CLI can be installed, can manage Claude Code and Codex integrations in a project, and can report reliable health status.
 
 ## Setup Paths
 
 ### Path 1: Global install (default)
 
 ```sh
-npm install -g pmkit
+npm install -g pmkey
 mkdir demo-project
 cd demo-project
-pmkit add claude
-pmkit check claude
+pmkey add claude
+pmkey check claude
 ```
 
 ### Path 2: Local project install
@@ -23,9 +23,9 @@ pmkit check claude
 ```sh
 mkdir demo-project
 cd demo-project
-npm install --save-dev pmkit
-npx pmkit add codex
-npx pmkit check codex
+npm install --save-dev pmkey
+npx pmkey add codex
+npx pmkey check codex
 ```
 
 ## Validation Scenarios
@@ -33,31 +33,31 @@ npx pmkit check codex
 ### 1. Add Claude Code integration
 
 ```sh
-pmkit add claude
+pmkey add claude
 ```
 
 Verify:
 - `.claude/commands/` exists
-- `/pmkit-*` command files are present
+- `/pmkey-*` command files are present
 - `.product/templates/` exists
 - `.pmkit/manifest.json` exists
 
 ### 2. Add Codex integration
 
 ```sh
-pmkit add codex
+pmkey add codex
 ```
 
 Verify:
 - `.Codex/commands/` exists
-- `/pmkit-*` command files are present as files named `pmkit-*.md`
+- `/pmkey-*` command files are present as files named `pmkey-*.md`
 - shared templates are still installed once
 - manifest now records both target coverage and shared assets
 
 ### 3. Re-run add idempotently
 
 ```sh
-pmkit add both
+pmkey add both
 ```
 
 Verify:
@@ -68,8 +68,8 @@ Verify:
 ### 4. Check health
 
 ```sh
-pmkit check both
-pmkit doctor both
+pmkey check both
+pmkey doctor both
 ```
 
 Verify:
@@ -80,7 +80,7 @@ Verify:
 ### 5. Remove one integration safely
 
 ```sh
-pmkit remove claude
+pmkey remove claude
 ```
 
 Verify:
@@ -91,11 +91,11 @@ Verify:
 ### 6. Remove final integration
 
 ```sh
-pmkit remove both
+pmkey remove both
 ```
 
 Verify:
-- all pmkit-managed assistant files are removed
+- all pmkey-managed assistant files are removed
 - shared templates are removed only if no remaining target requires them
 - manifest is deleted or normalized without stale ownership records
 
@@ -103,22 +103,22 @@ Verify:
 
 ### Missing file drift
 
-1. Run `pmkit add claude`
+1. Run `pmkey add claude`
 2. Manually delete one managed command file
-3. Run `pmkit check claude`
+3. Run `pmkey check claude`
 
 Expected result:
 - target is reported as `unhealthy` or `partial`
 - output explains which file is missing
-- recommended fix is to re-run `pmkit add claude`
+- recommended fix is to re-run `pmkey add claude`
 
 ### Orphaned manual file
 
-1. Create a non-pmkit file inside `.claude/commands/`
-2. Run `pmkit remove claude`
+1. Create a non-pmkey file inside `.claude/commands/`
+2. Run `pmkey remove claude`
 
 Expected result:
-- pmkit-managed files are removed
+- pmkey-managed files are removed
 - the unrelated manual file remains
 
 ## Completion Checklist
@@ -127,4 +127,4 @@ Expected result:
 - Local install flow works
 - `add`, `remove`, `check`, `doctor`, `version`, and `help` all resolve
 - Claude and Codex adapters use their correct command directories
-- Manifest-based ownership prevents accidental deletion of non-pmkit files
+- Manifest-based ownership prevents accidental deletion of non-pmkey files

@@ -5,7 +5,7 @@
 
 ## Summary
 
-Turn pm-kit into a production-ready npm CLI named `pmkit`, implemented in TypeScript on Node, with a single binary and subcommands for `add`, `remove`, `check`, `doctor`, `help`, and `version`. The CLI will manage static pm-kit command/template assets for both Claude Code and Codex via agent adapters, track pmkit-owned files in a project-local manifest, and provide safe install/remove/check flows for global and local usage.
+Turn pmkey into a production-ready npm CLI named `pmkey`, implemented in TypeScript on Node, with a single binary and subcommands for `add`, `remove`, `check`, `doctor`, `help`, and `version`. The CLI will manage static pmkey command/template assets for both Claude Code and Codex via agent adapters, track pmkey-owned files in a project-local manifest, and provide safe install/remove/check flows for global and local usage.
 
 ## Technical Context
 
@@ -15,8 +15,8 @@ Turn pm-kit into a production-ready npm CLI named `pmkit`, implemented in TypeSc
 **Testing**: Vitest unit tests + integration tests using temporary fixture projects and filesystem assertions  
 **Target Platform**: Cross-platform developer environments with Node.js installed, with primary support for macOS and Linux and compatibility with Windows path handling  
 **Project Type**: Single-package CLI developer tool  
-**Performance Goals**: `pmkit add`, `remove`, and `check` complete in under 3 seconds on a typical local project, excluding first-time npm installation  
-**Constraints**: Must preserve Markdown asset fidelity, avoid deleting non-pmkit files, support both global and local CLI usage, and keep runtime dependencies minimal  
+**Performance Goals**: `pmkey add`, `remove`, and `check` complete in under 3 seconds on a typical local project, excluding first-time npm installation  
+**Constraints**: Must preserve Markdown asset fidelity, avoid deleting non-pmkey files, support both global and local CLI usage, and keep runtime dependencies minimal  
 **Scale/Scope**: One npm package, two assistant adapters, fewer than 20 managed asset files, single-project repo migration from shell installer to structured CLI
 
 ## Constitution Check
@@ -27,7 +27,7 @@ Turn pm-kit into a production-ready npm CLI named `pmkit`, implemented in TypeSc
 |-----------|--------|-------|
 | Project constitution defined and enforceable | ✅ Pass | `.specify/memory/constitution.md` currently contains placeholder template text rather than active governance rules, so no concrete gates are enforceable yet |
 | Simplicity and scope discipline | ✅ Pass | Design stays as a single-package CLI with filesystem operations only and no service/runtime backend |
-| Safe project modification | ✅ Pass | Planned manifest-based ownership tracking keeps `remove` scoped to pmkit-managed files |
+| Safe project modification | ✅ Pass | Planned manifest-based ownership tracking keeps `remove` scoped to pmkey-managed files |
 | Documentation and onboarding clarity | ✅ Pass | Plan includes README/global-vs-local guidance, quickstart coverage, and explicit CLI contracts |
 
 **Constitution verdict**: No blocking constitution gates are defined beyond general safety and simplicity expectations, and the planned design satisfies those expectations.
@@ -90,9 +90,9 @@ README.md
 All major implementation choices are resolved in [research.md](research.md):
 
 1. Publish a TypeScript CLI to npm rather than extending the shell installer
-2. Keep one `pmkit` binary with subcommands instead of multiple executables
+2. Keep one `pmkey` binary with subcommands instead of multiple executables
 3. Model Claude Code and Codex as adapter implementations behind shared orchestration
-4. Use a root-level `.pmkit/manifest.json` to track pmkit-owned files for safe `remove`
+4. Use a root-level `.pmkit/manifest.json` to track pmkey-owned files for safe `remove`
 5. Define `check` as a filesystem and configuration health validation command, with `doctor` reserved for richer diagnostics and repair guidance
 
 ## Phase 1 Summary (Design complete)

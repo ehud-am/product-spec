@@ -97,6 +97,6 @@ export async function runAdd(options: AddOptions): Promise<OperationSummary> {
     changedTargets,
     skippedTargets,
     files,
-    notes: ["Run `pmkit check` to validate the installed integrations."]
+    notes: ["Run `pmkey check` to validate the installed integrations."]
   };
 }

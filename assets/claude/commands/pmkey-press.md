@@ -2,7 +2,7 @@
 description: Provide the press release for the project following Amazon's Working Backwards methodology.
 handoffs:
   - label: Write FAQs
-    agent: pmkit-faq
+    agent: pmkey-faq
     prompt: Write the FAQs that challenge this press release
 ---
 
@@ -26,6 +26,6 @@ You are creating or updating the press release document at `.product/press.md`.
 
 ### Execution Flow
 
-1. The text after `/pmkit-press` describes what to write.
+1. The text after `/pmkey-press` describes what to write.
 2. Create or update the current upcoming press release using Amazon's Working Backwards format.
-3. Preserve historical entries and suggest `/pmkit-faq` when appropriate.
+3. Preserve historical entries and suggest `/pmkey-faq` when appropriate.

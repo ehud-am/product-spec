@@ -1,11 +1,11 @@
 {
-  "name": "pm-kit",
+  "name": "pmkey",
   "version": "0.2.0",
-  "description": "pm-kit CLI for installing product-management command assets into Claude Code and Codex projects",
+  "description": "pmkey CLI for installing product-management command assets into Claude Code and Codex projects",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "pmkit": "dist/cli/main.js"
+    "pmkey": "dist/cli/main.js"
   },
   "files": [
     "dist",
@@ -20,6 +20,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",
+    "audit:names": "node scripts/audit-current-names.mjs",
     "test": "vitest run",
     "prepare": "npm run build",
     "cli": "tsx src/cli/main.ts"

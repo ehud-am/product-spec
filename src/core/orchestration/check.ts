@@ -93,8 +93,8 @@ export async function runCheck(options: CheckOptions): Promise<CheckResult> {
       status === "healthy"
         ? "No action needed."
         : status === "missing"
-          ? `Run \`pmkit add ${target}\` to install this integration.`
-          : `Run \`pmkit add ${target}\` to refresh managed files, then \`pmkit check ${target}\` again.`;
+          ? `Run \`pmkey add ${target}\` to install this integration.`
+          : `Run \`pmkey add ${target}\` to refresh managed files, then \`pmkey check ${target}\` again.`;
 
     reports.push({
       target,
