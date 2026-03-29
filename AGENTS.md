@@ -1,12 +1,11 @@
 # pm-kit Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-03-28
+Auto-generated from all feature plans. Last updated: 2026-03-29
 
 ## Active Technologies
-
-- TypeScript 5.x on Node.js 22 LTS
-- `commander`, `zod`, `vitest`, `tsx`, `typescript`
-- Versioned packaged assets under `assets/`
+- TypeScript 5.x on Node.js 22 LTS + `commander` for CLI parsing, `zod` for config/state validation, `vitest` for test execution, `tsx` for local development, `typescript` for build/type-check (003-prime-time-cli)
+- File system only; project-local managed state in `.pmkit/manifest.json`; managed assets written into assistant command directories and `.product/templates/` (003-prime-time-cli)
+- Markdown command and template assets packaged under `assets/` (003-prime-time-cli)
 
 ## Project Structure
 
@@ -33,7 +32,7 @@ specs/                   # Feature specs (spec-kit output)
 - No trailing whitespace; single blank line between sections
 
 ## Recent Changes
-- 003-prime-time-cli: Added TypeScript CLI packaging, multi-agent assets, and npm-first distribution
+- 003-prime-time-cli: Added TypeScript 5.x on Node.js 22 LTS + `commander` for CLI parsing, `zod` for config/state validation, `vitest` for test execution, `tsx` for local development, `typescript` for build/type-check
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

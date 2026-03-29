@@ -2,48 +2,88 @@
 
 The product management counterpart to [spec-kit](https://github.com/github/spec-kit). pm-kit brings product management disciplines to spec-driven development, following Amazon's Working Backwards (PR/FAQ) methodology.
 
-While spec-kit handles engineering specifications, pm-kit handles the **product narrative** — the domain context, press releases, FAQs, and requirements that define *what* you're building and *why*, before spec-kit defines *how*.
+While spec-kit handles engineering specifications, pm-kit handles the product narrative: the domain context, press releases, FAQs, and requirements that define what you're building and why before spec-kit defines how.
 
 ## Installation
 
-```sh
-curl -sSL https://raw.githubusercontent.com/ehud-am/pm-kit/main/install.sh | sh
-```
-
-This installs the four pm-kit commands into `.claude/commands/` and the four templates into `.product/templates/` in your current directory. Safe to re-run — always installs the latest version.
-
-### Manual install
-
-If you prefer to copy files yourself (or don't have `curl`):
+### Recommended: install globally from npm
 
 ```sh
-# From a cloned pm-kit repo:
-cp .claude/commands/pm-*.md /your-project/.claude/commands/
-cp -r .product/templates /your-project/.product/
+npm install -g pm-kit
 ```
 
-## Usage in Claude Code
+Then inside any project:
 
-In any Claude Code chat, type a command followed by your input:
-
-```
-/pm-domain We're building a B2B SaaS tool that helps logistics managers track last-mile delivery in real time.
-
-/pm-press Write the press release for our first release — route optimization for small fleets.
-
-/pm-faq
-
-/pm-align
+```sh
+pmkit add claude
+pmkit add codex
+pmkit add both
+pmkit check both
 ```
 
-Each command reads text after the `/command-name` as its input. Commands with no required input (like `/pm-faq` and `/pm-align`) can be invoked with no arguments — they read context from the `.product/` files automatically.
+### Option 2: run directly without a global install
 
-| Command | When to use |
-|---------|-------------|
-| `/pm-domain` | First — establish who your users are, what problem you're solving, and who the competitors are |
-| `/pm-press` | Write a press release as if the product has already shipped |
-| `/pm-faq` | Generate questions that challenge every press release claim |
-| `/pm-align` | After engineering specs exist — reconcile product docs with what was actually built |
+Because the npm package is named `pm-kit` while the binary is named `pmkit`, the one-command `npx` form is:
+
+```sh
+npx --yes --package pm-kit pmkit add claude
+```
+
+Use the same pattern for other commands:
+
+```sh
+npx --yes --package pm-kit pmkit check both
+```
+
+### Option 3: install from GitHub source
+
+This is the least recommended path, but it is useful when testing unpublished changes:
+
+```sh
+npm install -g github:ehud-am/pm-kit
+```
+
+## CLI Usage
+
+Project integration commands:
+
+```text
+pmkit add claude
+pmkit add codex
+pmkit add both
+pmkit remove claude
+pmkit remove codex
+pmkit remove both
+pmkit check both
+pmkit doctor both
+pmkit version
+pmkit help
+```
+
+| Command | Purpose |
+|---------|---------|
+| `pmkit add <target>` | Add pm-kit managed assistant commands and shared templates to the current project |
+| `pmkit remove <target>` | Remove only pm-kit managed files for the selected target |
+| `pmkit check [target]` | Validate that managed integrations are present and healthy |
+| `pmkit doctor [target]` | Show richer diagnostics and recovery guidance |
+| `pmkit version` | Print the installed CLI version |
+| `pmkit help` | Show command help and examples |
+
+## Assistant Commands
+
+After adding an integration, use the installed slash commands inside the assistant:
+
+```text
+/pmkit-domain ...
+/pmkit-press ...
+/pmkit-faq
+/pmkit-align
+```
+
+| Target | Command directory | Slash commands |
+|--------|-------------------|----------------|
+| Claude Code | `.claude/commands/` | `/pmkit-domain`, `/pmkit-press`, `/pmkit-faq`, `/pmkit-align` |
+| Codex | `.Codex/commands/` | `/pmkit-domain`, `/pmkit-press`, `/pmkit-faq`, `/pmkit-align` |
 
 ## How It Works
 
@@ -54,53 +94,56 @@ pm-kit creates a `.product/` folder in your project that maintains a living, cum
 | File | Purpose |
 |------|---------|
 | `.product/domain.md` | Industry context, target users, terminology, competitive landscape |
-| `.product/press.md` | Press releases for every release (upcoming first, then historical) |
-| `.product/faq.md` | External + internal FAQs for every release (upcoming first, then historical) |
+| `.product/press.md` | Press releases for every release, upcoming first and historical below |
+| `.product/faq.md` | External and internal FAQs for every release, upcoming first and historical below |
 | `.product/requirements.md` | Release-independent, complete view of all product use cases and capabilities |
 
-### Commands
+### Workflow
 
-| Command | Description |
-|---------|-------------|
-| `/pm-domain` | Define or update domain knowledge background |
-| `/pm-press` | Write press releases following Working Backwards |
-| `/pm-faq` | Generate FAQs that challenge press release claims |
-| `/pm-align` | Reconcile product docs with engineering specs after `/speckit.specify` |
-
-## Workflow
-
-```
-/pm-domain  -->  /pm-press  -->  /pm-faq  -->  /speckit.specify  -->  /pm-align
-  (context)     (promise)      (challenge)     (engineer)           (reconcile)
+```text
+/pmkit-domain  -->  /pmkit-press  -->  /pmkit-faq  -->  /speckit.specify  -->  /pmkit-align
+    (context)       (promise)         (challenge)       (engineer)             (reconcile)
 ```
 
-1. **`/pm-domain`** — Establish the domain context: who are the users, what's the problem, who are the competitors
-2. **`/pm-press`** — Write a press release as if the next release has already shipped. This forces clarity on customer value
-3. **`/pm-faq`** — Challenge the press release with hard questions from customers and stakeholders
-4. **`/speckit.specify`** — Hand off to spec-kit to write engineering specifications
-5. **`/pm-align`** — After specs are written, reconcile the product docs: update press/faq for accuracy, and rebuild requirements.md as the complete product spec
+1. `/pmkit-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
+2. `/pmkit-press` writes a press release as if the next release has already shipped.
+3. `/pmkit-faq` challenges the press release with hard questions from customers and stakeholders.
+4. `/speckit.specify` hands off to spec-kit for engineering specifications.
+5. `/pmkit-align` reconciles product docs with the final engineering scope.
 
 ## Key Concepts
 
 ### Cumulative Documents
 
-Unlike traditional release notes, pm-kit documents are **cumulative**. The press release file contains *all* press releases ever written for the project — the upcoming release at the top, historical releases below. The same applies to FAQs. This means anyone can read the full product story in one place.
+Unlike traditional release notes, pm-kit documents are cumulative. The press release file contains all press releases ever written for the project, with the upcoming release at the top and historical releases below. The same applies to FAQs.
 
-### requirements.md — The Product Spec
+### `requirements.md` as the Product Spec
 
-While press.md and faq.md are organized by release, `requirements.md` is organized by **functional area**. It's the release-independent, always-current answer to "what does this product do?" — a complete inventory of use cases and capabilities, updated by `/pm-align` after each spec cycle.
+While `press.md` and `faq.md` are organized by release, `requirements.md` is organized by functional area. It is the release-independent, always-current answer to "what does this product do?"
 
 ### Working Backwards
 
 The methodology is Amazon's PR/FAQ approach:
-- Start with the **customer experience** (press release), not the technical solution
-- Force hard questions early (FAQ) before committing engineering resources
-- Let the press release be the **contract** — if you can't write a compelling press release, the feature isn't ready to build
+- start with the customer experience, not the technical solution
+- force hard questions early before committing engineering resources
+- treat the press release as a contract for value, clarity, and scope
+
+## Release and Publishing
+
+GitHub Actions now handles:
+- CI validation on pushes and pull requests
+- packaging tagged releases
+- publishing the npm package when a `v*` tag is pushed
 
 ## Requirements
 
-- [Claude Code](https://claude.ai/code) CLI or IDE extension
-- [spec-kit](https://github.com/github/spec-kit) (for the `/speckit.specify` integration in the workflow)
+- Node.js and npm
+- [Claude Code](https://claude.ai/code) and/or Codex for assistant integration targets
+- [spec-kit](https://github.com/github/spec-kit) for the `/speckit.specify` portion of the workflow
+
+## Changelog
+
+Project history lives in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

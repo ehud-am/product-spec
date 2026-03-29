@@ -1,0 +1,17 @@
+src/
+tests/
+specs/
+.specify/
+.github/
+.agents/
+.claude/
+.product/
+CLAUDE.md
+AGENTS.md
+install.sh
+vitest.config.ts
+tsconfig.json
+node_modules/
+coverage/
+*.log
+*.tgz
