@@ -3,6 +3,14 @@
   "version": "0.2.0",
   "description": "product-spec CLI for installing product-management command assets into Claude Code and Codex projects",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ehud-am/product-spec"
+  },
+  "homepage": "https://github.com/ehud-am/product-spec#readme",
+  "bugs": {
+    "url": "https://github.com/ehud-am/product-spec/issues"
+  },
   "type": "module",
   "bin": {
     "product-spec": "dist/cli/main.js"
