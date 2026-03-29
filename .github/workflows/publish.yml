@@ -26,9 +26,7 @@ jobs:
           registry-url: https://registry.npmjs.org
           always-auth: true
           cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            ui/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Configure npm authentication
         run: |
@@ -37,14 +35,34 @@ jobs:
             'always-auth=true' \
             '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}' > "$HOME/.npmrc"
 
+      - name: Resolve release version
+        id: version
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          if [[ -z "${VERSION}" || "${VERSION}" == "${GITHUB_REF_NAME}" ]]; then
+            VERSION="${{ github.event.release.tag_name }}"
+            VERSION="${VERSION#v}"
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
       - name: Install root dependencies
         run: npm ci
 
-      - name: Install UI dependencies
-        run: npm --prefix ui ci
+      - name: Align package version to release
+        run: npm version "${{ steps.version.outputs.version }}" --no-git-tag-version --allow-same-version
 
-      - name: Verify release
-        run: npm run verify
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+      - name: Pack dry run
+        run: npm pack --dry-run
 
       - name: Publish package to npm
         run: npm publish --provenance --access public
