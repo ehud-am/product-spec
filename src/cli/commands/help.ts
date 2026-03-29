@@ -5,17 +5,17 @@ export function configureHelp(program: Command): void {
     "after",
     `
 Examples:
-  pmkey add claude
-  pmkey add both
-  pmkey remove codex
-  pmkey check both
-  pmkey doctor claude
+  product-kit add claude
+  product-kit add both
+  product-kit remove codex
+  product-kit check both
+  product-kit doctor claude
 `
   );
 
   program
     .command("help")
-    .description("Show help for pmkey")
+    .description("Show help for product-kit")
     .action(() => {
       program.outputHelp();
     });

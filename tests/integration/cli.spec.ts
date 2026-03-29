@@ -28,21 +28,21 @@ afterEach(async () => {
   await Promise.all(cleanupPaths.splice(0).map((target) => rm(target, { recursive: true, force: true })));
 });
 
-describe("pmkey CLI", () => {
+describe("product-kit CLI", () => {
   it("adds Claude and Codex assets and writes a manifest", async () => {
-    const projectDir = await makeProjectDir("pmkey-add-");
+    const projectDir = await makeProjectDir("product-kit-add-");
 
     const result = runCli(projectDir, "add", "both");
 
     expect(result.status).toBe(0);
-    const manifest = JSON.parse(await readFile(path.join(projectDir, ".pmkit/manifest.json"), "utf8"));
+    const manifest = JSON.parse(await readFile(path.join(projectDir, ".product-kit/manifest.json"), "utf8"));
     expect(manifest.targets).toHaveLength(2);
-    expect(await readFile(path.join(projectDir, ".claude/commands/pmkey-domain.md"), "utf8")).toContain("/pmkey-domain");
-    expect(await readFile(path.join(projectDir, ".Codex/commands/pmkey-domain.md"), "utf8")).toContain(".product/domain.md");
+    expect(await readFile(path.join(projectDir, ".claude/commands/product-kit-domain.md"), "utf8")).toContain("/product-kit-domain");
+    expect(await readFile(path.join(projectDir, ".Codex/commands/product-kit-domain.md"), "utf8")).toContain(".product/domain.md");
   });
 
-  it("removes only pmkey-managed files and keeps unrelated files", async () => {
-    const projectDir = await makeProjectDir("pmkey-remove-");
+  it("removes only product-kit-managed files and keeps unrelated files", async () => {
+    const projectDir = await makeProjectDir("product-kit-remove-");
 
     expect(runCli(projectDir, "add", "both").status).toBe(0);
     await writeFile(path.join(projectDir, ".claude/commands/manual.md"), "manual", "utf8");
@@ -52,14 +52,14 @@ describe("pmkey CLI", () => {
     expect(result.status).toBe(0);
     expect(result.stdout).toContain("Changed targets: claude");
     await expect(readFile(path.join(projectDir, ".claude/commands/manual.md"), "utf8")).resolves.toBe("manual");
-    await expect(readFile(path.join(projectDir, ".Codex/commands/pmkey-domain.md"), "utf8")).resolves.toContain(".product/domain.md");
+    await expect(readFile(path.join(projectDir, ".Codex/commands/product-kit-domain.md"), "utf8")).resolves.toContain(".product/domain.md");
   });
 
   it("reports unhealthy state when a managed file drifts", async () => {
-    const projectDir = await makeProjectDir("pmkey-check-");
+    const projectDir = await makeProjectDir("product-kit-check-");
 
     expect(runCli(projectDir, "add", "claude").status).toBe(0);
-    await rm(path.join(projectDir, ".claude/commands/pmkey-domain.md"));
+    await rm(path.join(projectDir, ".claude/commands/product-kit-domain.md"));
 
     const check = runCli(projectDir, "check", "claude");
     const doctor = runCli(projectDir, "doctor", "claude");
@@ -69,13 +69,13 @@ describe("pmkey CLI", () => {
     expect(doctor.stdout).toContain("Recommended action");
   });
 
-  it("shows pmkey in the help output", async () => {
-    const projectDir = await makeProjectDir("pmkey-help-");
+  it("shows product-kit in the help output", async () => {
+    const projectDir = await makeProjectDir("product-kit-help-");
 
     const result = runCli(projectDir, "--help");
 
     expect(result.status).toBe(0);
-    expect(result.stdout).toContain("Usage: pmkey");
-    expect(result.stdout).not.toContain("Usage: pmkit");
+    expect(result.stdout).toContain("Usage: product-kit");
+    expect(result.stdout).not.toContain("Usage: pmkey");
   });
 });

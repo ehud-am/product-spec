@@ -1,44 +1,44 @@
-# pmkey
+# product-kit
 
-The product management counterpart to [spec-kit](https://github.com/github/spec-kit). pmkey brings product management disciplines to spec-driven development, following Amazon's Working Backwards (PR/FAQ) methodology.
+The product management counterpart to [spec-kit](https://github.com/github/spec-kit). product-kit brings product management disciplines to spec-driven development, following Amazon's Working Backwards (PR/FAQ) methodology.
 
-While spec-kit handles engineering specifications, pmkey handles the product narrative: the domain context, press releases, FAQs, and requirements that define what you're building and why before spec-kit defines how.
+While spec-kit handles engineering specifications, product-kit handles the product narrative: the domain context, press releases, FAQs, and requirements that define what you're building and why before spec-kit defines how.
 
 ## Installation
 
 ### Recommended: install globally from npm
 
 ```sh
-npm install -g pmkey
+npm install -g product-kit
 ```
 
 Then inside any project:
 
 ```sh
-pmkey add claude
-pmkey add codex
-pmkey add both
-pmkey check both
+product-kit add claude
+product-kit add codex
+product-kit add both
+product-kit check both
 ```
 
 ### Option 2: run directly without a global install
 
 ```sh
-npx --yes --package pmkey pmkey add claude
+npx --yes --package product-kit product-kit add claude
 ```
 
 Use the same pattern for other commands:
 
 ```sh
-npx --yes --package pmkey pmkey check both
+npx --yes --package product-kit product-kit check both
 ```
 
 ### Option 3: install from GitHub source
 
-This is the least recommended path, but it is useful when testing unpublished changes. The repository slug remains `pm-kit` for now even though the published package and CLI name are `pmkey`:
+This is the least recommended path, but it is useful when testing unpublished changes:
 
 ```sh
-npm install -g github:ehud-am/pm-kit
+npm install -g github:ehud-am/product-kit
 ```
 
 ## CLI Usage
@@ -46,46 +46,46 @@ npm install -g github:ehud-am/pm-kit
 Project integration commands:
 
 ```text
-pmkey add claude
-pmkey add codex
-pmkey add both
-pmkey remove claude
-pmkey remove codex
-pmkey remove both
-pmkey check both
-pmkey doctor both
-pmkey version
-pmkey help
+product-kit add claude
+product-kit add codex
+product-kit add both
+product-kit remove claude
+product-kit remove codex
+product-kit remove both
+product-kit check both
+product-kit doctor both
+product-kit version
+product-kit help
 ```
 
 | Command | Purpose |
 |---------|---------|
-| `pmkey add <target>` | Add pmkey-managed assistant commands and shared templates to the current project |
-| `pmkey remove <target>` | Remove only pmkey-managed files for the selected target |
-| `pmkey check [target]` | Validate that managed integrations are present and healthy |
-| `pmkey doctor [target]` | Show richer diagnostics and recovery guidance |
-| `pmkey version` | Print the installed CLI version |
-| `pmkey help` | Show command help and examples |
+| `product-kit add <target>` | Add product-kit-managed assistant commands and shared templates to the current project |
+| `product-kit remove <target>` | Remove only product-kit-managed files for the selected target |
+| `product-kit check [target]` | Validate that managed integrations are present and healthy |
+| `product-kit doctor [target]` | Show richer diagnostics and recovery guidance |
+| `product-kit version` | Print the installed CLI version |
+| `product-kit help` | Show command help and examples |
 
 ## Assistant Commands
 
 After adding an integration, use the installed slash commands inside the assistant:
 
 ```text
-/pmkey-domain ...
-/pmkey-press ...
-/pmkey-faq
-/pmkey-align
+/product-kit-domain ...
+/product-kit-press ...
+/product-kit-faq
+/product-kit-align
 ```
 
 | Target | Command directory | Slash commands |
 |--------|-------------------|----------------|
-| Claude Code | `.claude/commands/` | `/pmkey-domain`, `/pmkey-press`, `/pmkey-faq`, `/pmkey-align` |
-| Codex | `.Codex/commands/` | `/pmkey-domain`, `/pmkey-press`, `/pmkey-faq`, `/pmkey-align` |
+| Claude Code | `.claude/commands/` | `/product-kit-domain`, `/product-kit-press`, `/product-kit-faq`, `/product-kit-align` |
+| Codex | `.Codex/commands/` | `/product-kit-domain`, `/product-kit-press`, `/product-kit-faq`, `/product-kit-align` |
 
 ## How It Works
 
-pmkey creates a `.product/` folder in your project that maintains a living, cumulative view of the product across releases. Each document grows over time, telling the full story of the project from its first release to the one currently under development.
+product-kit creates a `.product/` folder in your project that maintains a living, cumulative view of the product across releases. Each document grows over time, telling the full story of the project from its first release to the one currently under development.
 
 ### Documents
 
@@ -99,21 +99,21 @@ pmkey creates a `.product/` folder in your project that maintains a living, cumu
 ### Workflow
 
 ```text
-/pmkey-domain  -->  /pmkey-press  -->  /pmkey-faq  -->  /speckit.specify  -->  /pmkey-align
+/product-kit-domain  -->  /product-kit-press  -->  /product-kit-faq  -->  /speckit.specify  -->  /product-kit-align
     (context)       (promise)         (challenge)       (engineer)             (reconcile)
 ```
 
-1. `/pmkey-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
-2. `/pmkey-press` writes a press release as if the next release has already shipped.
-3. `/pmkey-faq` challenges the press release with hard questions from customers and stakeholders.
+1. `/product-kit-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
+2. `/product-kit-press` writes a press release as if the next release has already shipped.
+3. `/product-kit-faq` challenges the press release with hard questions from customers and stakeholders.
 4. `/speckit.specify` hands off to spec-kit for engineering specifications.
-5. `/pmkey-align` reconciles product docs with the final engineering scope.
+5. `/product-kit-align` reconciles product docs with the final engineering scope.
 
 ## Key Concepts
 
 ### Cumulative Documents
 
-Unlike traditional release notes, pmkey documents are cumulative. The press release file contains all press releases ever written for the project, with the upcoming release at the top and historical releases below. The same applies to FAQs.
+Unlike traditional release notes, product-kit documents are cumulative. The press release file contains all press releases ever written for the project, with the upcoming release at the top and historical releases below. The same applies to FAQs.
 
 ### `requirements.md` as the Product Spec
 
@@ -135,7 +135,7 @@ GitHub Actions now handles:
 
 ## Rename Notes
 
-`pmkey` is now the canonical package name, CLI name, and assistant command prefix. The project still keeps `.pmkit/manifest.json` as an internal compatibility path, and the GitHub repository slug remains `pm-kit` for now.
+`product-kit` is now the canonical package name, CLI name, assistant command prefix, and project-local manifest path.
 
 ## Requirements
 

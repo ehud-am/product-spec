@@ -15,30 +15,25 @@ const files = [
   "src/core/orchestration/add.ts",
   "src/core/orchestration/check.ts",
   "tests/integration/cli.spec.ts",
-  "assets/claude/commands/pmkey-align.md",
-  "assets/claude/commands/pmkey-domain.md",
-  "assets/claude/commands/pmkey-faq.md",
-  "assets/claude/commands/pmkey-press.md",
-  "assets/codex/commands/pmkey-align.md",
-  "assets/codex/commands/pmkey-domain.md",
-  "assets/codex/commands/pmkey-faq.md",
-  "assets/codex/commands/pmkey-press.md"
+  "assets/claude/commands/product-kit-align.md",
+  "assets/claude/commands/product-kit-domain.md",
+  "assets/claude/commands/product-kit-faq.md",
+  "assets/claude/commands/product-kit-press.md",
+  "assets/codex/commands/product-kit-align.md",
+  "assets/codex/commands/product-kit-domain.md",
+  "assets/codex/commands/product-kit-faq.md",
+  "assets/codex/commands/product-kit-press.md"
 ];
 
 const allowedSubstrings = [
-  ".pmkit/manifest.json",
-  "pmkitVersion",
-  "github:ehud-am/pm-kit",
-  "repository slug remains `pm-kit`",
-  "and the `pm-kit` repository slug remain intentional compatibility-era identifiers for now",
-  "from `pm-kit`/`pmkit` to `pmkey`",
-  "Initial pm-kit command set",
-  'expect(result.stdout).not.toContain("Usage: pmkit")',
-  "- Renamed the published package, CLI, and assistant command prefix from `pm-kit`/`pmkit` to `pmkey`",
-  "- Documented that `.pmkit/manifest.json` and the `pm-kit` repository slug remain intentional compatibility-era identifiers for now"
+  ".product-kit/manifest.json",
+  "productKitVersion",
+  "github:ehud-am/product-kit",
+  "Initial product-kit command set",
+  'expect(result.stdout).not.toContain("Usage: pmkey");'
 ];
 
-const forbiddenPatterns = [/pm-kit/g, /pmkit/g, /\/pmkit/g];
+const forbiddenPatterns = [/pmkey/g, /pm-kit/g, /pmkit/g, /\/pmkey/g, /\/pmkit/g];
 const failures = [];
 
 for (const file of files) {

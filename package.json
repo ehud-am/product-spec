@@ -1,11 +1,11 @@
 {
-  "name": "pmkey",
+  "name": "product-kit",
   "version": "0.2.0",
-  "description": "pmkey CLI for installing product-management command assets into Claude Code and Codex projects",
+  "description": "product-kit CLI for installing product-management command assets into Claude Code and Codex projects",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "pmkey": "dist/cli/main.js"
+    "product-kit": "dist/cli/main.js"
   },
   "files": [
     "dist",

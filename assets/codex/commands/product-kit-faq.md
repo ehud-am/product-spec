@@ -2,7 +2,7 @@
 description: Create or update FAQs that challenge and support the press release claims.
 handoffs:
   - label: Update Press Release
-    agent: pmkey-press
+    agent: product-kit-press
     prompt: Update the press release based on what we learned from the FAQs
   - label: Build Specification
     agent: speckit.specify

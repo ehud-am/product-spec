@@ -1,4 +1,4 @@
-# pm-kit Development Guidelines
+# product-kit Development Guidelines
 
 Auto-generated from all feature plans. Last updated: 2026-03-28
 
@@ -14,16 +14,16 @@ Auto-generated from all feature plans. Last updated: 2026-03-28
 assets/                  # Packaged command and template assets
 src/                     # TypeScript CLI source
 tests/                   # Vitest unit and integration coverage
-.specify/                # spec-kit directory (not owned by pm-kit)
+.specify/                # spec-kit directory (not owned by product-kit)
 specs/                   # Feature specs (spec-kit output)
 ```
 
 ## Commands
 
-- `pmkit add <target>` — install pm-kit assets into a project
-- `pmkit remove <target>` — remove only pm-kit managed assets for a target
-- `pmkit check [target]` — validate integration health
-- `pmkit doctor [target]` — show richer diagnostics and recovery guidance
+- `product-kit add <target>` — install product-kit assets into a project
+- `product-kit remove <target>` — remove only product-kit managed assets for a target
+- `product-kit check [target]` — validate integration health
+- `product-kit doctor [target]` — show richer diagnostics and recovery guidance
 
 ## Code Style
 

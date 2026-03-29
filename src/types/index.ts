@@ -24,7 +24,7 @@ export interface ManagedTargetState {
 
 export interface ManagedManifest {
   manifestVersion: string;
-  pmkitVersion: string;
+  productKitVersion: string;
   projectRoot: string;
   targets: ManagedTargetState[];
   sharedAssets: AssetRecord[];

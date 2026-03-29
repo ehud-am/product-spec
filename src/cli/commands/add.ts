@@ -7,13 +7,13 @@ export function registerAddCommand(program: Command, context: { rootDir: string;
   program
     .command("add")
     .argument("<target>", "claude, codex, or both")
-    .description("Add pmkey-managed integration files to the current project")
+    .description("Add product-kit-managed integration files to the current project")
     .action(async (target: string) => {
       const summary = await runAdd({
         rootDir: context.rootDir,
         packageRoot: context.packageRoot,
         requestedTarget: parseRequestedTarget(target),
-        pmkitVersion: context.version
+        productKitVersion: context.version
       });
       process.stdout.write(formatOperationSummary("add", summary));
     });
