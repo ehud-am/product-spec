@@ -21,16 +21,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # npm trusted publishing requires npm 11.5.1+, which is satisfied by the Node 24 runner toolchain.
+          node-version: 24
           registry-url: https://registry.npmjs.org
           cache: npm
           cache-dependency-path: package-lock.json
-
-      - name: Ensure npm supports trusted publishing
-        run: |
-          # npm trusted publishing requires npm 11.5.1+.
-          npm install --global npm@^11.5.1
-          npm --version
 
       - name: Resolve release version
         id: version

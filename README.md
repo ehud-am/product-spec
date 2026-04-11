@@ -158,7 +158,7 @@ GitHub Actions now handles:
 - publishing the npm package when a `v*` tag is pushed
 - publishing through npm trusted publishing from GitHub Actions instead of a long-lived PAT/token secret
 
-The publish workflow now uses npm trusted publishing from GitHub Actions via OIDC instead of a long-lived `NPM_TOKEN` or PAT-style publish credential. The workflow upgrades npm in CI to a version that supports trusted publishing, requests `id-token: write`, and publishes with `npm publish` without writing token credentials into `.npmrc`.
+The publish workflow now uses npm trusted publishing from GitHub Actions via OIDC instead of a long-lived `NPM_TOKEN` or PAT-style publish credential. The workflow runs on Node 24 so the bundled npm satisfies trusted publishing requirements, requests `id-token: write`, and publishes with `npm publish` without writing token credentials into `.npmrc`.
 
 For public releases published through trusted publishing, npm automatically generates provenance attestations. The npm package must have a trusted publisher configured for this repository and `.github/workflows/publish.yml` before release publishing will succeed.
 
